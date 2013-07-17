@@ -6,14 +6,21 @@ Requires tesseract (for OCR) and imagemagick (for scaling to improve accuracy) t
 
 ## Usage
 Case-sensitive text search:
-	ruby grepimg.rb "Text to Find" *.jpg
+```
+ruby grepimg.rb "Text to Find" *.jpg
+```
 
 Case-insensitive text search:
-	ruby grepimg.rb -i "text to find" *.jpg
+```
+ruby grepimg.rb -i "text to find" *.jpg
+```
 
 Regular expression search (can be combined with -i):
-	ruby grepimg.rb -e "foo.*bar" *.jpg
+```
+ruby grepimg.rb -e "foo.*bar" *.jpg
+```
 
 Piping in files to search from:
-	find . | ruby grepimg.rb foo
-
+```
+find . | ruby grepimg.rb foo
+```
