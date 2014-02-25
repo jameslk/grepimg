@@ -21,7 +21,11 @@ class GrepimgCli
 
 protected
   def ocr_engine
-    @ocr_engine ||= RTesseract
+    return @ocr_engine if @ocr_engine
+
+    @ocr_engine = RTesseract
+    @ocr_engine.new # Fixes a bug in the gem where the dependency RMagick isn't being loaded
+    @ocr_engine
   end
 
   def image_resize_factor
@@ -54,14 +58,16 @@ protected
   end
 
   def push_param(param)
-    if !@param_count
-      @param_count = 0
+    unless @first_param_pushed
       self.pattern = param
-    elsif @param_count == 1
-      self.file_mask = param
+      @first_param_pushed = true
+    else
+      if file_mask
+        file_mask << param
+      else
+        self.file_mask = [param]
+      end
     end
-
-    @param_count += 1
   end
 
   def image_text(filename)
@@ -82,7 +88,7 @@ protected
 
           yield file_text
         end
-      rescue
+      rescue Magick::ImageMagickError
         next
       end
     end

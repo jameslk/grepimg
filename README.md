@@ -2,7 +2,8 @@
 A hacked together Ruby script to search through image files for a piece of text, ala grep-style.
 
 ## Installation
-Requires tesseract (for OCR) and imagemagick (for scaling to improve accuracy) to be installed on your system and depends on the `rtesseract` gem.
+Requires tesseract (for OCR) and imagemagick (for scaling to improve accuracy) to be installed on your system and
+depends on the `rtesseract` and `rmagick` gems.
 
 ## Usage
 Case-sensitive text search:
